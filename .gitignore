@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Custom
+/build
+/_deps
+/bin
+*.code-workspace
