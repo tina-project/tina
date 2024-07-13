@@ -5,3 +5,6 @@
 [submodule "core/third_party/sqlite3"]
 	path = core/third_party/sqlite3
 	url = https://github.com/tina-project/sqlite3.git
+[submodule "third_party/g3log"]
+	path = third_party/g3log
+	url = https://github.com/tina-project/g3log.git
