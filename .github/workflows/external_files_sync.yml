@@ -26,7 +26,7 @@ jobs:
       - name: Push Files
         uses: actions-js/push@master
         with:
-          github_token: ${{secrets/GITHUB_TOKEN}}
+          github_token: ${{secrets.GITHUB_TOKEN}}
           author_email: ${{secrets.BOT_EMAIL}}
           author_name: ${{secrets.BOT_USERNAME}}
           message: sync external files
