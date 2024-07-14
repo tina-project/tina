@@ -16,7 +16,7 @@ jobs:
           submodules: 'recursive'
 
       - name: Sync ~/cmake/openssl-dep.cmake
-        run: wget https://raw.githubusercontent.com/tina-project/openssl-dep/main/openssl-dep.cmake
+        run: wget -O openssl-dep.cmake https://raw.githubusercontent.com/tina-project/openssl-dep/main/openssl-dep.cmake
         working-directory: ${{github.workspace}}/cmake
 
       - name: Extract Branch Name
