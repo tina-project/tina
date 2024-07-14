@@ -45,13 +45,17 @@ if(UNIX)
     )
 
     if(NOT DEFINED OPENSSL_DEP_COMPILE_MULTITHREAD_NUM)
-        set(COMPILE_COMMAND "make clean && make install")
+        set(COMPILE_COMMAND "make")
     else()
-        set(COMPILE_COMMAND "make clean && make -j${OPENSSL_DEP_COMPILE_MULTITHREAD_NUM} && make install")
+        message(STATUS "Enable multi-thread compilation: ${OPENSSL_DEP_COMPILE_MULTITHREAD_NUM}")
+        set(COMPILE_COMMAND "make -j${OPENSSL_DEP_COMPILE_MULTITHREAD_NUM}")
+    endif()
 
     add_custom_command(
         OUTPUT ${OPENSSL_DEP_LIBCRYPTO_PATH}
-        COMMAND ${COMPILE_COMMAND}
+        COMMAND make clean
+        COMMAND /bin/bash -c ${COMPILE_COMMAND}
+        COMMAND make install
         WORKING_DIRECTORY ${TARGET_EXTRACT_DIR}
         COMMENT "Compiling OpenSSL"
     )
@@ -85,7 +89,7 @@ elseif(WIN32)
     set(TARGET_DOWNLOAD_FILE "${TARGET_DOWNLOAD_DIR}/OpenSSL-3.3.1-MinGW_W64.zip")
 
     file(MAKE_DIRECTORY ${TARGET_DOWNLOAD_DIR})
-    file(DOWNLOAD ${TARGET_PACKAGE_URL} ${TARGET_DOWNLOAD_FILE}
+    file(DOWNLOAD ${TARGET_BIN_PACKAGE_URL} ${TARGET_BIN_DOWNLOAD_FILE}
         EXPECTED_HASH SHA256=${TARGET_PACKAGE_SHA256}
         SHOW_PROGRESS
     )
