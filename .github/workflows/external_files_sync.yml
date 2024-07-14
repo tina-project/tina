@@ -1,0 +1,33 @@
+name: Sync External Files
+
+on:
+  shedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  sync_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+
+      - name: Sync ~/cmake/openssl-dep.cmake
+        run: wget https://raw.githubusercontent.com/tina-project/openssl-dep/main/openssl-dep.cmake
+        working-directory: ${{github.workspace}}/cmake
+
+      - name: Extract Branch Name
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
+      - name: Push Files
+        uses: actions-js/push@master
+        with:
+          github_token: ${{secrets/GITHUB_TOKEN}}
+          author_email: ${{secrets.BOT_EMAIL}}
+          author_name: ${{secrets.BOT_USERNAME}}
+          message: sync external files
+          branch: ${{steps.extract_branch.outputs.branch}}
