@@ -28,6 +28,10 @@ jobs:
         run: bash ${{github.workspace}}/auto_gen.sh
         working-directory: ${{github.workspace}}
 
+      - name: Extract Branch Name
+        run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+        id: extract_branch
+
       - name: Push New Generated Codes
         uses: actions-js/push@master
         with:
