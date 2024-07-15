@@ -6,10 +6,13 @@
 #include<sstream>
 #include<string>
 
+#include"core/utils/exception.h"
 #include"g3log/loglevels.hpp"
 #include"g3log/logmessage.hpp"
 
 namespace tina::core::log {
+
+    DECLARE_EXCEPTION( g3log_sink_exception )
 
     class g3log_sink {
 
@@ -37,8 +40,8 @@ namespace tina::core::log {
             std::size_t _ull_refresh_after_x_msgs;
             LEVELS _ls_log_severity;
 
+            g3log_sink( const g3log_sink& ) = delete;
             g3log_sink& operator=( const g3log_sink& ) = delete;
-            g3log_sink( const g3log_sink& __gs_other ) = delete;
 
     }; // class g3log_sink
 

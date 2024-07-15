@@ -1,6 +1,9 @@
 #include"g3log_sink.h"
+#include"core/utils/errcodes.h"
 #include"core/utils/folders.h"
 #include"filesinkhelper.ipp"
+
+#include<cstring>
 
 #define LOG_PREFIX      "ExpenseTracker"
 #define LOG_TIMEFORMAT  "%Y-%m-%d %H:%M:%S.%f3"
@@ -27,9 +30,7 @@ log::g3log_sink::g3log_sink( std::size_t __ull_refresh_after_x_msgs, unsigned in
     if ( !( this -> _up_ofs_wfile -> is_open() ) )
     {
         this -> _up_ofs_wfile.reset();
-        // ********************
-        // TODO: error handling
-        // ********************
+        throw g3log_sink_exception( utils::errcodes::g3log_sink::G3LOG_SINK_LOGFILE_NOT_OPEN , strerror( errno ) );
     }
     return;
 }
