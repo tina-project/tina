@@ -10,7 +10,7 @@ class todo_data:
         self.start_line = start_line
         self.start_col = start_col
 
-todo_regex = re.compile( r'(//|#) \*+\n(//|#) TODO: (.+)\n(//|#) \*+' , re.MULTILINE )
+todo_regex = re.compile( r'\s*(//|#) \*+\n\s*(//|#) TODO: (.+)\n\s*(//|#) \*+' , re.MULTILINE )
 
 def find_files_to_check( dir: str , exts: list[str] ) -> list[str]:
     files = []
