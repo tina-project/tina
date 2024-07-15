@@ -12,6 +12,16 @@
 
 namespace utils = tina::core::utils;
 
+std::string utils::errcodes::get_name( utils::errcodes::g3log_sink __ec_code ){
+    try {
+        return _um_g3log_sink_namemap.at( __ec_code );
+    }
+    catch ( std::out_of_range )
+    {
+        return "";
+    }
+}
+
 std::string utils::errcodes::get_name( utils::errcodes::sql __ec_code ){
     try {
         return _um_sql_namemap.at( __ec_code );
@@ -22,8 +32,14 @@ std::string utils::errcodes::get_name( utils::errcodes::sql __ec_code ){
     }
 }
 
+const std::unordered_map<utils::errcodes::g3log_sink,std::string> utils::errcodes::_um_g3log_sink_namemap = {
+    { OK , "OK" },
+    { G3LOG_SINK_LOGFILE_NOT_OPEN , "G3LOG_SINK_LOGFILE_NOT_OPEN" },
+};
+
 const std::unordered_map<utils::errcodes::sql,std::string> utils::errcodes::_um_sql_namemap = {
     { OK , "OK" },
-    { SQL_NOT_OPEN , "SQL_NOT_OPEN" },
+    { SQL_DB_NOT_OPEN , "SQL_DB_NOT_OPEN" },
+    { SQL_ILLEGAL_DB , "SQL_ILLEGAL_DB" },
 };
 

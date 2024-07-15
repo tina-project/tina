@@ -23,14 +23,22 @@ namespace tina::core::utils {
             errcodes& operator=( const errcodes& ) = delete;
 
         public:
+            typedef enum g3log_sink : int {
+                OK = 0,
+                G3LOG_SINK_LOGFILE_NOT_OPEN = 1,
+            } g3log_sink;
+
             typedef enum sql : int {
                 OK = 0,
-                SQL_NOT_OPEN = 1,
+                SQL_DB_NOT_OPEN = 1,
+                SQL_ILLEGAL_DB = 2,
             } sql;
 
+            static std::string get_name( g3log_sink __ec_code );
             static std::string get_name( sql __ec_code );
 
         private:
+            static const std::unordered_map<g3log_sink,std::string> _um_g3log_sink_namemap;
             static const std::unordered_map<sql,std::string> _um_sql_namemap;
 
     }; // class errcodes
