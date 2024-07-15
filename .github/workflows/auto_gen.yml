@@ -1,0 +1,38 @@
+name: Code Auto-Generation
+
+on:
+  push:
+    paths:
+      - ".github/workflows/auto_gen.yml"
+      - "core/tools/**"
+      - "auto_gen.sh"
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: 3.9
+
+jobs:
+  generation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{env.PYTHON_VERSION}}
+
+      - name: Run Code Auto-Generation
+        run: bash ${{github.workspace}}/auto_gen.sh
+        working-directory: ${{github.workspace}}
+
+      - name: Push New Generated Codes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          author_email: ${{secrets.BOT_EMAIL}}
+          author_name: ${{secrets.BOT_USERNAME}}
+          message: update auto-generated codes
+          branch: ${{steps.extract_branch.outputs.branch}}
