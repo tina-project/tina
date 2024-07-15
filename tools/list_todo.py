@@ -26,7 +26,7 @@ def check_file( filename: str ) -> list[todo_data]:
     matches = todo_regex.finditer( content )
     for match in matches:
         start_pos = match.start()
-        start_line = content.count( '\n' , 0 , start_pos )
+        start_line = content.count( '\n' , 0 , start_pos ) + 1
         start_col = start_pos - content.rfind( '\n' , 0 , start_pos )
         todo_msg = match.group( 3 )
         todos.append( todo_data( todo_msg , start_line , start_col ) )
@@ -55,7 +55,7 @@ def main():
                 global_todos_count += todos_count
                 print( f" - Found { todos_count } TODO in file \"{ os.path.relpath( file , project_root_dir ) }\":" )
                 for todo in todos:
-                    print( f"   * { todo.msg } (Ln { todo.start_line }, Col { todo.start_col })" )
+                    print( f"   * \033[0;31m{ todo.msg }\033[0m (Ln { todo.start_line }, Col { todo.start_col })" )
         print( f"Leaving directory: { dir }" )
 
     print( f"Work done, { global_todos_count } TODO found." )
