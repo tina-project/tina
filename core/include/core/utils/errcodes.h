@@ -24,12 +24,10 @@ namespace tina::core::utils {
 
         public:
             typedef enum g3log_sink : int {
-                OK = 0,
                 G3LOG_SINK_LOGFILE_NOT_OPEN = 1,
             } g3log_sink;
 
             typedef enum sql : int {
-                OK = 0,
                 SQL_DB_NOT_OPEN = 1,
                 SQL_ILLEGAL_DB = 2,
             } sql;
