@@ -1,0 +1,6 @@
+#ifndef _TINA_CORE_GLOBAL_MACROS_H_
+#define _TINA_CORE_GLOBAL_MACROS_H_
+
+#define TINA_OK 0
+
+#endif // _TINA_CORE_GLOBAL_MACROS_H_
