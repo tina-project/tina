@@ -31,6 +31,12 @@ namespace tina::core::utils {
                 SQL_DB_NOT_OPEN = 1,
                 SQL_ILLEGAL_DB = 2,
                 SQL_CREATE_TABLE_FAILED = 3,
+                SQL_WRITE_FORMAT_FAILED = 4,
+                SQL_WRITE_HEADER_FAILED = 5,
+                SQL_WRITE_HASH_FAILED = 6,
+                SQL_WRITE_TAG_FAILED = 7,
+                SQL_WRITE_CALENDAR_FAILED = 8,
+                SQL_WRITE_NOTES_FAILED = 9,
                 SQL_UNEXCEPTED = 255,
             } sql;
 
