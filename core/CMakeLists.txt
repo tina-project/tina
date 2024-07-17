@@ -5,3 +5,4 @@ set(TINA_CORE_SOVERSION 1)
 
 add_subdirectory(third_party)
 add_subdirectory(src)
+add_subdirectory(tests)
