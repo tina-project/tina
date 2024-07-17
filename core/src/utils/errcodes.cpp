@@ -39,5 +39,7 @@ const std::unordered_map<utils::errcodes::g3log_sink,std::string> utils::errcode
 const std::unordered_map<utils::errcodes::sql,std::string> utils::errcodes::_um_sql_namemap = {
     { SQL_DB_NOT_OPEN , "SQL_DB_NOT_OPEN" },
     { SQL_ILLEGAL_DB , "SQL_ILLEGAL_DB" },
+    { SQL_CREATE_TABLE_FAILED , "SQL_CREATE_TABLE_FAILED" },
+    { SQL_UNEXCEPTED , "SQL_UNEXCEPTED" },
 };
 

@@ -30,6 +30,8 @@ namespace tina::core::utils {
             typedef enum sql : int {
                 SQL_DB_NOT_OPEN = 1,
                 SQL_ILLEGAL_DB = 2,
+                SQL_CREATE_TABLE_FAILED = 3,
+                SQL_UNEXCEPTED = 255,
             } sql;
 
             static std::string get_name( g3log_sink __ec_code );
