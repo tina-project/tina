@@ -1,11 +1,16 @@
 #include"g3log_sink.h"
+#include"core/utils/dirs.h"
 #include"core/utils/errcodes.h"
-#include"core/utils/folders.h"
+#include"core/utils/exe_infos.h"
 #include"filesinkhelper.ipp"
 
 #include<cstring>
 
-#define LOG_PREFIX      "ExpenseTracker"
+#ifdef NDEBUG
+#define LOG_ID ""
+#else
+#define LOG_ID "DEBUG"
+#endif
 #define LOG_TIMEFORMAT  "%Y-%m-%d %H:%M:%S.%f3"
 
 namespace log = tina::core::log;
@@ -13,7 +18,7 @@ namespace fs = std::filesystem;
 
 log::g3log_sink::g3log_sink( std::size_t __ull_refresh_after_x_msgs, unsigned int __ui_log_severity ) :
     _g3lmldf_log_details_func( &( this -> _log_details_to_string ) ) ,
-    _p_logfile_path( this -> _get_log_folder() ) ,
+    _p_logfile_path( utils::dirs::get_tina_log_dir() ) ,
     _up_ofs_wfile( new std::ofstream ) ,
     _ull_write_counter( 0 ) ,
     _ull_refresh_after_x_msgs( __ull_refresh_after_x_msgs ) ,
@@ -24,7 +29,7 @@ log::g3log_sink::g3log_sink( std::size_t __ull_refresh_after_x_msgs, unsigned in
         fs::create_directories( this -> _p_logfile_path );
         // here: _p_logfile_path is still the log folder path
     }
-    std::string logfile_name = g3::internal::createLogFileName( LOG_PREFIX , "" );
+    std::string logfile_name = g3::internal::createLogFileName( utils::exe_infos::get_exe_filename().string() , LOG_ID );
     this -> _p_logfile_path /= logfile_name;
     this -> _up_ofs_wfile -> open( this -> _p_logfile_path , std::ios::out | std::ios::trunc );
     if ( !( this -> _up_ofs_wfile -> is_open() ) )
@@ -59,10 +64,6 @@ void log::g3log_sink::write_log( g3::LogMessageMover __g3lmm_msg ){
         this -> _oss_writebuf.str( "" );
     } // write all msgs in buf to log file; refresh buf
     return;
-}
-
-fs::path log::g3log_sink::_get_log_folder(){
-    return utils::folders::get_tina_data_folder() / "log";
 }
 
 std::string log::g3log_sink::_log_details_to_string( const g3::LogMessage& __g3lm_msg ){

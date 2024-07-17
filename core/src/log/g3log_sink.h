@@ -23,7 +23,6 @@ namespace tina::core::log {
             void write_log( g3::LogMessageMover __g3lmm_msg );
 
         protected:
-            static std::filesystem::path _get_log_folder();
             static std::string _log_details_to_string( const g3::LogMessage& __g3lm_msg );
             static LEVELS _parse_log_severity( unsigned int __ui_log_severity );
 
