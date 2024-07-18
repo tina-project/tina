@@ -46,6 +46,7 @@ namespace tina::core::utils {
                 SQL_CB_ROOT_HASH_REDEFINE = 3,
                 SQL_CB_ILLEGAL_HASH_ID = 4,
                 SQL_CB_ILLEGAL_HASH = 5,
+                SQL_CB_ILLEGAL_EMAIL_ADDR = 6,
                 SQL_CB_UNEXCEPTED = 255,
             } sql_cb;
 

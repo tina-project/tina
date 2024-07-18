@@ -65,6 +65,7 @@ const std::unordered_map<utils::errcodes::sql_cb,std::string> utils::errcodes::_
     { SQL_CB_ROOT_HASH_REDEFINE , "SQL_CB_ROOT_HASH_REDEFINE" },
     { SQL_CB_ILLEGAL_HASH_ID , "SQL_CB_ILLEGAL_HASH_ID" },
     { SQL_CB_ILLEGAL_HASH , "SQL_CB_ILLEGAL_HASH" },
+    { SQL_CB_ILLEGAL_EMAIL_ADDR , "SQL_CB_ILLEGAL_EMAIL_ADDR" },
     { SQL_CB_UNEXCEPTED , "SQL_CB_UNEXCEPTED" },
 };
 
