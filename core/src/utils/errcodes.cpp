@@ -32,6 +32,16 @@ std::string utils::errcodes::get_name( utils::errcodes::sql __ec_code ){
     }
 }
 
+std::string utils::errcodes::get_name( utils::errcodes::sql_cb __ec_code ){
+    try {
+        return _um_sql_cb_namemap.at( __ec_code );
+    }
+    catch ( std::out_of_range )
+    {
+        return "";
+    }
+}
+
 const std::unordered_map<utils::errcodes::g3log_sink,std::string> utils::errcodes::_um_g3log_sink_namemap = {
     { G3LOG_SINK_LOGFILE_NOT_OPEN , "G3LOG_SINK_LOGFILE_NOT_OPEN" },
 };
@@ -47,5 +57,14 @@ const std::unordered_map<utils::errcodes::sql,std::string> utils::errcodes::_um_
     { SQL_WRITE_CALENDAR_FAILED , "SQL_WRITE_CALENDAR_FAILED" },
     { SQL_WRITE_NOTES_FAILED , "SQL_WRITE_NOTES_FAILED" },
     { SQL_UNEXCEPTED , "SQL_UNEXCEPTED" },
+};
+
+const std::unordered_map<utils::errcodes::sql_cb,std::string> utils::errcodes::_um_sql_cb_namemap = {
+    { SQL_CB_ILLEGAL_ARGC , "SQL_CB_ILLEGAL_ARGC" },
+    { SQL_CB_OVERWRITE_EXISTING_DATA , "SQL_CB_OVERWRITE_EXISTING_DATA" },
+    { SQL_CB_ROOT_HASH_REDEFINE , "SQL_CB_ROOT_HASH_REDEFINE" },
+    { SQL_CB_ILLEGAL_HASH_ID , "SQL_CB_ILLEGAL_HASH_ID" },
+    { SQL_CB_ILLEGAL_HASH , "SQL_CB_ILLEGAL_HASH" },
+    { SQL_CB_UNEXCEPTED , "SQL_CB_UNEXCEPTED" },
 };
 

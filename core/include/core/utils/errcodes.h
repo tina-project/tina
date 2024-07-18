@@ -40,12 +40,23 @@ namespace tina::core::utils {
                 SQL_UNEXCEPTED = 255,
             } sql;
 
+            typedef enum sql_cb : int {
+                SQL_CB_ILLEGAL_ARGC = 1,
+                SQL_CB_OVERWRITE_EXISTING_DATA = 2,
+                SQL_CB_ROOT_HASH_REDEFINE = 3,
+                SQL_CB_ILLEGAL_HASH_ID = 4,
+                SQL_CB_ILLEGAL_HASH = 5,
+                SQL_CB_UNEXCEPTED = 255,
+            } sql_cb;
+
             static std::string get_name( g3log_sink __ec_code );
             static std::string get_name( sql __ec_code );
+            static std::string get_name( sql_cb __ec_code );
 
         private:
             static const std::unordered_map<g3log_sink,std::string> _um_g3log_sink_namemap;
             static const std::unordered_map<sql,std::string> _um_sql_namemap;
+            static const std::unordered_map<sql_cb,std::string> _um_sql_cb_namemap;
 
     }; // class errcodes
 
