@@ -68,11 +68,13 @@ void log::g3log_sink::write_log( g3::LogMessageMover __g3lmm_msg ){
 
 std::string log::g3log_sink::_log_details_to_string( const g3::LogMessage& __g3lm_msg ){
     std::ostringstream oss;
+    oss << "(" << __g3lm_msg.threadID() << ": " << __g3lm_msg.file() << " -> "
+        << __g3lm_msg.function() << ":" << __g3lm_msg.line() << ")";
+    std::string pos_detail = oss.str();
+    oss.str( "" );
     oss << "[" << __g3lm_msg.timestamp( LOG_TIMEFORMAT ) << "] "
         << __g3lm_msg.level() << ( __g3lm_msg._level.value == g3::kWarningValue ? "\t" : "\t\t" )
-        << std::left << std::setw( 64 )
-        << "(" << __g3lm_msg.threadID() << ": " << __g3lm_msg.file() << " -> "
-        << __g3lm_msg.function() << ":" << __g3lm_msg.line() << ")";
+        << std::left << std::setw( 64 ) << pos_detail;
     return oss.str();
 }
 
